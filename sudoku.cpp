@@ -59,10 +59,9 @@ void updateConflicts() {
                     }
                 }
                 
-                
                 int startRow = (i/3)*3, startCol = (j/3)*3;
-                for(int r = 0; r < 3 && boxConflict[box][num] == true; r++) {
-                    for(int c = 0; c < 3 && boxConflict[box][num] == true; c++) {
+                for(int r = 0; r < 3; r++) {
+                    for(int c = 0; c < 3; c++) {
                         if((startRow+r != i || startCol+c != j) && 
                             sudoku[startRow+r][startCol+c] == num) {
                             boxConflict[box][num] = true;
@@ -78,7 +77,7 @@ bool hasConflict(int row, int col) {
     if(sudoku[row][col] == 0) return false;
     int num = sudoku[row][col];
     int box = (row/3)*3 + col/3;
-    return rowConflict[row][num] || colConflict[col][num] || boxConflict[box][num];
+    return (rowConflict[row][num] || colConflict[col][num] || boxConflict[box][num]);
 }
 
 bool isValid(int row, int col, int num) {
@@ -279,7 +278,7 @@ bool generateFullSudoku(int row, int col) {
     return false;
 }
 
-void generatePuzzle(int emptyCells = 40) {
+void generatePuzzle(int emptyCells = 50) {
     
     for(int i = 0; i < 9; i++)
         for(int j = 0; j < 9; j++)
